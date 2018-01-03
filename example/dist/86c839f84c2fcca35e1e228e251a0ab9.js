@@ -74,35 +74,84 @@ require = (function (modules, cache, entry) {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.borderWidth = borderWidth;
-exports.paddingWidth = paddingWidth;
-exports.contentWidth = contentWidth;
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
 /**
  * 获取目标元素的样式
  * @param  {Object HTMLElement} el 目标元素
  * @return {Object}    目标元素的所有样式
  */
-function _getStyle(el) {
-  var style = window.getComputedStyle ? window.getComputedStyle(el, null) : el.currentStyle;
-  return style;
-}
+// function _getStyle(el) {
+// 	let style = window.getComputedStyle ? 
+// 		window.getComputedStyle(el, null) :
+// 		el.currentStyle;
+// 	return style;
+// }
 
-function borderWidth(el) {
-  var rect = el.getBoundingClientRect();
-  return rect.width;
-}
+// export function borderWidth(el) {
+// 	let rect = el.getBoundingClientRect();
+// 	return rect.width;
+// }
 
-function paddingWidth(el) {
-  return el.clientWidth;
-}
+// export function paddingWidth(el) {
+// 	return el.clientWidth;
+// }
 
-function contentWidth(el) {
-  var paddingWidth = el.clientWidth;
-  var paddingLeft = parseInt(_getStyle(el)['paddingLeft'], 10),
-      paddingRight = parseInt(_getStyle(el)['paddingRight'], 10);
+// export function contentWidth(el) {
+// 	let paddingWidth = el.clientWidth;
+// 	let paddingLeft = parseInt(_getStyle(el)['paddingLeft'], 10),
+// 		paddingRight = parseInt(_getStyle(el)['paddingRight'], 10);
 
-  return paddingWidth - paddingLeft - paddingRight;
-}
+// 	return paddingWidth - paddingLeft - paddingRight;
+// }
+var Width = function () {
+  function Width() {
+    _classCallCheck(this, Width);
+  }
+
+  _createClass(Width, [{
+    key: "getBorderWidth",
+    value: function getBorderWidth(el) {
+      var rect = el.getBoundingClientRect();
+      return rect.width;
+    }
+  }, {
+    key: "getPaddingWidth",
+    value: function getPaddingWidth(el) {
+      return el.clientWidth;
+    }
+  }, {
+    key: "getContentWidth",
+    value: function getContentWidth(el) {
+      var paddingWidth = el.clientWidth;
+      var paddingLeft = parseInt(Width._getStyle(el)['paddingLeft'], 10),
+          paddingRight = parseInt(Width._getStyle(el)['paddingRight'], 10);
+
+      return paddingWidth - paddingLeft - paddingRight;
+    }
+
+    /**
+     * 获取目标元素的样式
+     * @param  {Object HTMLElement} el 目标元素
+     * @return {Object}    目标元素的所有样式
+     */
+
+  }], [{
+    key: "_getStyle",
+    value: function _getStyle(el) {
+      var style = window.getComputedStyle ? window.getComputedStyle(el, null) : el.currentStyle;
+      return style;
+    }
+  }]);
+
+  return Width;
+}();
+
+var width = new Width();
+exports.default = width;
 },{}],16:[function(require,module,exports) {
 "use strict";
 
@@ -113,14 +162,14 @@ exports.box = undefined;
 
 var _width = require("./width/width.js");
 
-var width = _interopRequireWildcard(_width);
+var _width2 = _interopRequireDefault(_width);
 
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var box = exports.box = {
-  contentWidth: width.contentWidth,
-  paddingWidth: width.paddingWidth,
-  borderWidth: width.borderWidth
+  getContentWidth: _width2.default.getContentWidth,
+  getPaddingWidth: _width2.default.getPaddingWidth,
+  getBorderWidth: _width2.default.getBorderWidth
 };
 },{"./width/width.js":17}],11:[function(require,module,exports) {
 "use strict";
@@ -128,9 +177,9 @@ var box = exports.box = {
 var _smartBox = require("../src/smart-box.js");
 
 var item1 = document.querySelector('.content-item1');
-var contentWidth = _smartBox.box.contentWidth(item1);
-var paddingWidth = _smartBox.box.paddingWidth(item1);
-var borderWidth = _smartBox.box.borderWidth(item1);
+var contentWidth = _smartBox.box.getContentWidth(item1);
+var paddingWidth = _smartBox.box.getPaddingWidth(item1);
+var borderWidth = _smartBox.box.getBorderWidth(item1);
 console.log(contentWidth, paddingWidth, borderWidth);
 // 
 // function _getStyle(el) {

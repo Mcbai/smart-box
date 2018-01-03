@@ -1,9 +1,9 @@
 import {box} from '../src/smart-box.js';
 
 var item1 = document.querySelector('.content-item1');
-var contentWidth = box.contentWidth(item1)
-var paddingWidth = box.paddingWidth(item1)
-var borderWidth = box.borderWidth(item1)
+var contentWidth = box.getContentWidth(item1)
+var paddingWidth = box.getPaddingWidth(item1)
+var borderWidth = box.getBorderWidth(item1)
 console.log(contentWidth,paddingWidth,borderWidth)
 // 
 // function _getStyle(el) {

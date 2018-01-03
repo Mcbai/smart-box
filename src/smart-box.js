@@ -1,7 +1,7 @@
-import * as width from './width/width.js';
+import width from './width/width.js';
 
 export let box = {
-	contentWidth: width.contentWidth,
-	paddingWidth: width.paddingWidth,
-	borderWidth: width.borderWidth
+	getContentWidth: width.getContentWidth,
+	getPaddingWidth: width.getPaddingWidth,
+	getBorderWidth: width.getBorderWidth
 }
