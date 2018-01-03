@@ -152,6 +152,62 @@ var Width = function () {
 
 var width = new Width();
 exports.default = width;
+},{}],18:[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var Height = function () {
+  function Height() {
+    _classCallCheck(this, Height);
+  }
+
+  _createClass(Height, [{
+    key: "getBorderHeight",
+    value: function getBorderHeight(el) {
+      var rect = el.getBoundingClientRect();
+      return rect.height;
+    }
+  }, {
+    key: "getPaddingHeight",
+    value: function getPaddingHeight(el) {
+      return el.clientHeight;
+    }
+  }, {
+    key: "getContentHeight",
+    value: function getContentHeight(el) {
+      var paddingHeight = el.clientHeight;
+      var paddingTop = parseInt(Height._getStyle(el)['paddingTop'], 10),
+          paddingBottom = parseInt(Height._getStyle(el)['paddingBottom'], 10);
+
+      return paddingHeight - paddingTop - paddingBottom;
+    }
+
+    /**
+     * 获取目标元素的样式
+     * @param  {Object HTMLElement} el 目标元素
+     * @return {Object}    目标元素的所有样式
+     */
+
+  }], [{
+    key: "_getStyle",
+    value: function _getStyle(el) {
+      var style = window.getComputedStyle ? window.getComputedStyle(el, null) : el.currentStyle;
+      return style;
+    }
+  }]);
+
+  return Height;
+}();
+
+var height = new Height();
+exports.default = height;
 },{}],16:[function(require,module,exports) {
 "use strict";
 
@@ -164,14 +220,22 @@ var _width = require("./width/width.js");
 
 var _width2 = _interopRequireDefault(_width);
 
+var _height = require("./height/height.js");
+
+var _height2 = _interopRequireDefault(_height);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var box = exports.box = {
   getContentWidth: _width2.default.getContentWidth,
   getPaddingWidth: _width2.default.getPaddingWidth,
-  getBorderWidth: _width2.default.getBorderWidth
+  getBorderWidth: _width2.default.getBorderWidth,
+
+  getContentHeight: _height2.default.getContentHeight,
+  getPaddingHeight: _height2.default.getPaddingHeight,
+  getBorderHeight: _height2.default.getBorderHeight
 };
-},{"./width/width.js":17}],11:[function(require,module,exports) {
+},{"./width/width.js":17,"./height/height.js":18}],11:[function(require,module,exports) {
 "use strict";
 
 var _smartBox = require("../src/smart-box.js");
@@ -181,6 +245,11 @@ var contentWidth = _smartBox.box.getContentWidth(item1);
 var paddingWidth = _smartBox.box.getPaddingWidth(item1);
 var borderWidth = _smartBox.box.getBorderWidth(item1);
 console.log(contentWidth, paddingWidth, borderWidth);
+
+var contentHeight = _smartBox.box.getContentHeight(item1);
+var paddingHeight = _smartBox.box.getPaddingHeight(item1);
+var borderHeight = _smartBox.box.getBorderHeight(item1);
+console.log(contentHeight, paddingHeight, borderHeight);
 // 
 // function _getStyle(el) {
 // 	var style = window.getComputedStyle ? 

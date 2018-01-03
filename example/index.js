@@ -5,6 +5,11 @@ var contentWidth = box.getContentWidth(item1)
 var paddingWidth = box.getPaddingWidth(item1)
 var borderWidth = box.getBorderWidth(item1)
 console.log(contentWidth,paddingWidth,borderWidth)
+
+var contentHeight = box.getContentHeight(item1)
+var paddingHeight = box.getPaddingHeight(item1)
+var borderHeight = box.getBorderHeight(item1)
+console.log(contentHeight,paddingHeight,borderHeight)
 // 
 // function _getStyle(el) {
 // 	var style = window.getComputedStyle ? 
