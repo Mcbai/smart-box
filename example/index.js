@@ -1,6 +1,9 @@
 import {box} from '../src/smart-box.js';
 
-var item1 = document.querySelector('.content-item1');
+// var item1 = document.querySelector('.content-item1');
+// var item1 = document.documentElement;
+var item1 = document.body;
+// 
 var contentWidth = box.getContentWidth(item1)
 var paddingWidth = box.getPaddingWidth(item1)
 var borderWidth = box.getBorderWidth(item1)
@@ -29,3 +32,10 @@ console.log(contentHeight,paddingHeight,borderHeight)
 
 // var Width = contentWidth(item1)
 // console.log(Width)
+// 
+// var de = document.documentElement;
+// console.log(de.clientWidth, de.clientHeight)
+// // var de = document.documentElement;
+// console.log(window.innerWidth, window.innerHeight)
+// var db = document.body;
+// console.log(db.clientWidth, db.clientHeight)

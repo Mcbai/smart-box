@@ -5,6 +5,18 @@
 	box-sizing: border-box;
 	border-radius: 5px;
 }
+html {
+	padding: 20px;
+	margin: 20px;
+	border: 20px solid;
+}
+
+body {
+	width: 300%;
+	padding: 20px;
+	margin: 20px;
+	border: 20px solid;
+}
 .clearfix {
 	*zoom: 1;
 }

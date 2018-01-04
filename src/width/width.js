@@ -33,15 +33,18 @@ class Width {
 	}
 
 	getPaddingWidth (el) {
-		return el.clientWidth;
+		// 除了 html 元素外，body 以及 body 内的所有元素，
+		// 其 clientWidth 属性都是包含 padding 在内的宽度
+		let borderLeft = parseInt(Width._getStyle(el)['borderLeftWidth'], 10),
+			borderRight = parseInt(Width._getStyle(el)['borderRightWidth'], 10);
+		return this.getBorderWidth(el) - borderLeft - borderRight;
 	}
 
 	getContentWidth (el) {
-		let paddingWidth = el.clientWidth;
 		let paddingLeft = parseInt(Width._getStyle(el)['paddingLeft'], 10),
 			paddingRight = parseInt(Width._getStyle(el)['paddingRight'], 10);
 
-		return paddingWidth - paddingLeft - paddingRight;
+		return this.getPaddingWidth(el) - paddingLeft - paddingRight;
 	}
 
 	/**

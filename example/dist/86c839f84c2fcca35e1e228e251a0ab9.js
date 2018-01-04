@@ -68,7 +68,7 @@ require = (function (modules, cache, entry) {
 
   // Override the current require with this new one
   return newRequire;
-})({17:[function(require,module,exports) {
+})({20:[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -121,16 +121,19 @@ var Width = function () {
   }, {
     key: "getPaddingWidth",
     value: function getPaddingWidth(el) {
-      return el.clientWidth;
+      // 除了 html 元素外，body 以及 body 内的所有元素，
+      // 其 clientWidth 属性都是包含 padding 在内的宽度
+      var borderLeft = parseInt(Width._getStyle(el)['borderLeftWidth'], 10),
+          borderRight = parseInt(Width._getStyle(el)['borderRightWidth'], 10);
+      return this.getBorderWidth(el) - borderLeft - borderRight;
     }
   }, {
     key: "getContentWidth",
     value: function getContentWidth(el) {
-      var paddingWidth = el.clientWidth;
       var paddingLeft = parseInt(Width._getStyle(el)['paddingLeft'], 10),
           paddingRight = parseInt(Width._getStyle(el)['paddingRight'], 10);
 
-      return paddingWidth - paddingLeft - paddingRight;
+      return this.getPaddingWidth(el) - paddingLeft - paddingRight;
     }
 
     /**
@@ -152,7 +155,7 @@ var Width = function () {
 
 var width = new Width();
 exports.default = width;
-},{}],18:[function(require,module,exports) {
+},{}],21:[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -208,7 +211,7 @@ var Height = function () {
 
 var height = new Height();
 exports.default = height;
-},{}],16:[function(require,module,exports) {
+},{}],19:[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -235,12 +238,15 @@ var box = exports.box = {
   getPaddingHeight: _height2.default.getPaddingHeight,
   getBorderHeight: _height2.default.getBorderHeight
 };
-},{"./width/width.js":17,"./height/height.js":18}],11:[function(require,module,exports) {
+},{"./width/width.js":20,"./height/height.js":21}],11:[function(require,module,exports) {
 "use strict";
 
 var _smartBox = require("../src/smart-box.js");
 
-var item1 = document.querySelector('.content-item1');
+// var item1 = document.querySelector('.content-item1');
+// var item1 = document.documentElement;
+var item1 = document.body;
+// 
 var contentWidth = _smartBox.box.getContentWidth(item1);
 var paddingWidth = _smartBox.box.getPaddingWidth(item1);
 var borderWidth = _smartBox.box.getBorderWidth(item1);
@@ -269,7 +275,14 @@ console.log(contentHeight, paddingHeight, borderHeight);
 
 // var Width = contentWidth(item1)
 // console.log(Width)
-},{"../src/smart-box.js":16}],0:[function(require,module,exports) {
+// 
+// var de = document.documentElement;
+// console.log(de.clientWidth, de.clientHeight)
+// // var de = document.documentElement;
+// console.log(window.innerWidth, window.innerHeight)
+// var db = document.body;
+// console.log(db.clientWidth, db.clientHeight)
+},{"../src/smart-box.js":19}],0:[function(require,module,exports) {
 var global = (1, eval)('this');
 var OldModule = module.bundle.Module;
 function Module() {
